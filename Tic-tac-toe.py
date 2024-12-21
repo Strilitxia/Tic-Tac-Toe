@@ -52,19 +52,35 @@ def draw_xo(row, col, player):
         screen.blit(y_img, (x_pos - 75, y_pos - 75))
     pygame.display.update()
 
-# Check winner
 def check_winner():
+    # Horizontal
     for row in range(BOARD_ROWS):
         if board[row][0] == board[row][1] == board[row][2] and board[row][0] is not None:
+            pygame.draw.line(screen, (255, 0, 0), (0, row * 200 + 100), (600, row * 200 + 100), LINE_WIDTH)
+            pygame.display.update()
             return board[row][0]
+
+    # Vertical
     for col in range(BOARD_COLS):
         if board[0][col] == board[1][col] == board[2][col] and board[0][col] is not None:
+            pygame.draw.line(screen, (255, 0, 0), (col * 200 + 100, 0), (col * 200 + 100, 600), LINE_WIDTH)
+            pygame.display.update()
             return board[0][col]
+
+    # Diagonal top-left to bottom-right
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] is not None:
+        pygame.draw.line(screen, (255, 0, 0), (0, 0), (600, 600), LINE_WIDTH)
+        pygame.display.update()
         return board[0][0]
+
+    # Diagonal top-right to bottom-left
     if board[0][2] == board[1][1] == board[2][0] and board[0][2] is not None:
+        pygame.draw.line(screen, (255, 0, 0), (600, 0), (0, 600), LINE_WIDTH)
+        pygame.display.update()
         return board[0][2]
+
     return None
+
 
 # Check for a tie
 def check_tie():
@@ -150,10 +166,18 @@ def main():
                     game_over = False
                     player = 'X'
 
-# Run the intro screen
+
 intro_screen()
 
-# Draw the initial grid and start the game
+# Clear all pending events
+pygame.event.clear()
+
+# Force redraw and wait a bit to separate game loop cleanly
 screen.fill(bg_color)
 draw_lines()
+pygame.display.update()
+pygame.time.delay(100)  # Delay 100ms to let the screen update and absorb click
+
 main()
+
+
