@@ -1,9 +1,21 @@
+# SPDX-FileCopyrightText: 2025-2026 Asif Amin <aminasif313@gmail.com>
+# SPDX-License-Identifier: MIT
+
 import pygame
 
+#initialize pygame
 pygame.init()
 
 
-screen=pygame.display.set_mode((550,600))
+#screen dimension
+HEIGHT,WIDTH=550,600
+
+
+#colors
+
+
+#initialize screen
+screen=pygame.display.set_mode((HEIGHT,WIDTH))
 
 
 
@@ -11,7 +23,7 @@ screen=pygame.display.set_mode((550,600))
 pygame.display.set_caption("Tic-Tac-Toe")
 
 
-#initialize screen
+
 screen_condition=True
 while screen_condition:
    for event in pygame.event.get():
