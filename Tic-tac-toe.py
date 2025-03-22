@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025-2026 Asif Amin <aminasif313@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Asif Amin 
 # SPDX-License-Identifier: MIT
 
 import pygame
