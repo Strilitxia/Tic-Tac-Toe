@@ -94,27 +94,29 @@ def draw_xo(row, col, player):
     pygame.display.update()
 
 def check_winner(player):
+    padding = 40
     # Check rows
     for row in range(BOARD_ROWS):
         if board[row][0] == board[row][1] == board[row][2] == player:
-            pygame.draw.line(screen, (255, 0, 0), (0, row * 200 + 100), (600, row * 200 + 100), LINE_WIDTH)
+            pygame.draw.line(screen, (255, 140, 0), (padding, y), (600 - padding, y),LINE_WIDTH)
             win_sound.play()  # Play winning sound
             return True
 
     # Check columns
     for col in range(BOARD_COLS):
         if board[0][col] == board[1][col] == board[2][col] == player:
-            pygame.draw.line(screen, (255, 0, 0), (col * 200 + 100, 0), (col * 200 + 100, 600), LINE_WIDTH)
+            x = col * 200 + 100
+            pygame.draw.line(screen, (255, 140, 0), (x, padding), (x, 600 - padding),LINE_WIDTH)
             win_sound.play()  # Play winning sound
             return True
 
     # Check diagonals
     if board[0][0] == board[1][1] == board[2][2] == player:
-        pygame.draw.line(screen, (255, 0, 0), (0, 0), (600, 600), LINE_WIDTH)
+        pygame.draw.line(screen, (255, 140, 0), (padding, padding), (600 - padding, 600 - padding), LINE_WIDTH)
         win_sound.play()  # Play winning sound
         return True
     if board[0][2] == board[1][1] == board[2][0] == player:
-        pygame.draw.line(screen, (255, 0, 0), (600, 0), (0, 600), LINE_WIDTH)
+        pygame.draw.line(screen, (255, 140, 0), (600 - padding, padding), (padding, 600 - padding), LINE_WIDTH)
         win_sound.play()  # Play winning sound
         return True
 
@@ -192,8 +194,11 @@ def sign_selection_screen():
     font = pygame.font.Font(None, 50)
     small_font = pygame.font.Font(None, 36)
 
-    x_button = pygame.Rect(WIDTH//4 - 75, 300, 150, 80)
-    o_button = pygame.Rect(3*WIDTH//4 - 75, 300, 150, 80)
+    x_button = pygame.Rect(WIDTH // 2 - 75, 225, 150, 100)
+    o_button = pygame.Rect(3 * WIDTH // 4 - 225, 375, 150, 100)
+    x_icon = pygame.transform.scale(x_img, (90, 90))
+    o_icon = pygame.transform.scale(o_img, (100, 100))
+
 
     while True:
         screen.fill((40, 40, 40))
@@ -207,8 +212,9 @@ def sign_selection_screen():
         x_text = small_font.render("X", True, (0, 0, 0))
         o_text = small_font.render("O", True, (0, 0, 0))
 
-        screen.blit(x_text, (x_button.centerx - x_text.get_width()//2, x_button.centery - x_text.get_height()//2))
-        screen.blit(o_text, (o_button.centerx - o_text.get_width()//2, o_button.centery - o_text.get_height()//2))
+        screen.blit(x_icon, (x_button.centerx - x_icon.get_width() // 2, x_button.centery -x_icon.get_height() // 2))
+
+        screen.blit(o_icon, (o_button.centerx - o_icon.get_width() // 2, o_button.centery -o_icon.get_height() // 2))
 
         pygame.display.flip()
 
